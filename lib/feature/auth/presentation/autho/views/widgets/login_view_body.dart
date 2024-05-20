@@ -1,7 +1,6 @@
 import 'package:gap/gap.dart';
 import 'package:todoapp/core/utils/assest_fonts_constant/app_assests.dart';
 import 'package:todoapp/core/utils/assest_fonts_constant/app_fonts.dart';
-import 'package:todoapp/core/utils/assest_fonts_constant/const_color.dart';
 import 'package:todoapp/feature/auth/presentation/autho/views/widgets/custombutton.dart';
 
 import 'package:flutter/material.dart';

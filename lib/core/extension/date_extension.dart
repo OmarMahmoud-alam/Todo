@@ -1,4 +1,3 @@
-
 extension DateOnlyCompare on DateTime {
   bool get isToday {
     final nowDate = DateTime.now();

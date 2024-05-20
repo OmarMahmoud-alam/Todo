@@ -1,27 +1,24 @@
-// import 'package:go_router/go_router.dart';
-//
+import 'package:go_router/go_router.dart';
+import 'package:todoapp/core/utils/route/magicroute.dart';
+import 'package:todoapp/feature/auth/presentation/autho/views/login_view.dart';
+import 'package:todoapp/feature/home/presentation/view/homeview.dart';
 
+abstract class AppRouter {
+  static const login = '/';
+  static const home = '/home';
 
-//
-// abstract class AppRouter {
-//  static const kOnBoarding = '/OnBoardingView';
+  static final router = GoRouter(
+                navigatorKey: navigatorKey,
 
-//   static final router = GoRouter(
-//     routes: [
-//       GoRoute(
-//         path: '/',
-//         builder: (context, state) => const SplashView(),
-//       ),
-//       GoRoute(
-//         path: kOnBoarding,
-//         builder: (context, state) => const OnBoardingView(),
-//       ),
-//       GoRoute(
-//         path: kLoginView,
-//         builder: (context, state) => const LoginView(),
-//       ),
-
-
-//     ],
-//   );
-// }
+    routes: [
+      GoRoute(
+        path: '/',
+        builder: (context, state) => const LoginView(),
+      ),
+      GoRoute(
+        path: home,
+        builder: (context, state) => const HomeView(),
+      ),
+    ],
+  );
+}

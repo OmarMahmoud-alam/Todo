@@ -1,3 +1,5 @@
+import 'package:go_router/go_router.dart';
+import 'package:todoapp/core/utils/route/route.dart';
 import 'package:todoapp/core/utils/storage/shared_preference.dart';
 import 'package:todoapp/feature/auth/data/models/user.dart';
 import 'package:todoapp/feature/auth/data/repos/login_repo.dart';
@@ -36,7 +38,7 @@ class LoginCubit extends Cubit<LoginState> {
           user = res;
           Preference.setString('userName', res.username);
           Preference.setString('token', res.token);
-
+          context.go(AppRouter.home);
           emit(LoginSucceful());
         },
       );

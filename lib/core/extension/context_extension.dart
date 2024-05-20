@@ -137,6 +137,7 @@ extension MediaqueryContextExtensions on BuildContext {
 
   /// check if device is on landscape mode
   bool get isLandscape => orientation == Orientation.landscape;
+
   /// check if device is on portrait mode
   bool get isPortrait => orientation == Orientation.portrait;
 

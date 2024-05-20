@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 /// Returns whether a dynamic value PROBABLY
@@ -626,6 +625,6 @@ class GetUtils {
     String info, {
     bool isError = false,
   }) {
-   log('$prefix $value $info'.trim());
+    log('$prefix $value $info'.trim());
   }
 }

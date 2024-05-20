@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:todoapp/core/utils/assest_fonts_constant/app_fonts.dart';
 import 'package:todoapp/core/utils/assest_fonts_constant/const_color.dart';
 
-
 class CustomAuthButton extends StatelessWidget {
   const CustomAuthButton({
     super.key,

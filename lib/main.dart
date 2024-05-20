@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoapp/core/utils/route/magicroute.dart';
+import 'package:todoapp/core/utils/route/route.dart';
 import 'package:todoapp/core/utils/storage/shared_preference.dart';
 import 'package:todoapp/feature/auth/presentation/autho/views/login_view.dart';
 import 'package:todoapp/feature/auth/presentation/autho/views_models/login_cubit/login_cubit.dart';
@@ -19,14 +21,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => LoginCubit(),
-      child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(
-                seedColor: const Color.fromARGB(255, 160, 158, 157)),
-            useMaterial3: true,
-          ),
-          home: const LoginView()),
+      child: MaterialApp.router(
+        routerConfig: AppRouter.router,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color.fromARGB(255, 160, 158, 157)),
+          useMaterial3: true,
+        ),
+      ),
     );
   }
 }

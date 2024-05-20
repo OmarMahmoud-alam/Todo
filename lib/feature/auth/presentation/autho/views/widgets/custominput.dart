@@ -20,9 +20,9 @@ class Completeinput extends StatelessWidget {
           children: [
             Text(
               name,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
             ),
-           Gap(5),
+            const Gap(5),
             (isrequired)
                 ? const Opacity(
                     opacity: 0.80,
@@ -39,7 +39,7 @@ class Completeinput extends StatelessWidget {
                 : const SizedBox()
           ],
         ),
-Gap(8),
+        const Gap(8),
         child
       ],
     );

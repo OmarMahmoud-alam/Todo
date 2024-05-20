@@ -1,10 +1,10 @@
-import 'dart:developer';
-
-
+import 'package:todoapp/core/utils/storage/shared_preference.dart';
+import 'package:todoapp/feature/auth/data/models/user.dart';
 import 'package:todoapp/feature/auth/data/repos/login_repo.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoapp/feature/auth/data/repos/refresh_token_repo.dart';
 import 'package:todoapp/feature/auth/presentation/autho/views/widgets/custom_snackbar.dart';
 
 part 'login_state.dart';
@@ -18,40 +18,55 @@ class LoginCubit extends Cubit<LoginState> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool showPassword = true;
-  bool localeIsEn = true;
+  late UserModel user;
+  Future login(BuildContext context) async {
+    if (formKey.currentState!.validate()) {
+      emit(LoginLoading());
 
-  Future login() async {
-    /*   var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult != ConnectivityResult.mobile &&
-        connectivityResult != ConnectivityResult.wifi) {
-      showSnackBar(
-        LocaleKeys.noInternetConnectivity.tr(),
+      final res =
+          await loginRepo.login(emailController.text, passwordController.text);
+      res.fold(
+        (err) {
+          showErrorSnackBar(context, err);
+
+          emit(LoginFail());
+        },
+        (res) async {
+          print(res.token);
+          user = res;
+          Preference.setString('userName', res.username);
+          Preference.setString('token', res.token);
+
+          emit(LoginSucceful());
+        },
       );
-    }*/
-
-    if (emailController.text.length < 10) {
-      showUppearSnackBar2(
-          'error the  email must be at 10 characters long at least ',
-          //width: 200, //must be at  characters long ',
-          // LocaleKeys.pleaseProvideAValidEmailAddress.tr(),
-
-          color: Colors.red);
-      return;
+    } else {
+      emit(LoginInitial());
     }
+  }
 
-    if (passwordController.text.length < 8) {
-      showUppearSnackBar2(
-          'Password is Wrong'
-          //  LocaleKeys.pleaseProvideAValidPasswordShouldGreaterThan8Character.tr(),
-          ,
-          color: Colors.red);
+  Future<void> checkTokenToautologin(BuildContext context) async {
+    var token = Preference.getString('token');
+    if (token == null) {
       return;
+    } else {
+      final res = await RefreshTokenRepo.getrefreshtoken(
+          emailController.text, passwordController.text);
+      res.fold(
+        (err) {
+          showErrorSnackBar(context, err);
+
+          emit(LoginFail());
+        },
+        (res) async {
+          print(res.token);
+
+          Preference.setString('userName', res.username);
+          Preference.setString('token', res.token);
+
+          emit(LoginSucceful());
+        },
+      );
     }
-    emit(LoginLoading());
-    MagicRouter.navigateAndPopAll(const BottomNavScreen());
-
-    emit(LoginInitial());
-
-
   }
 }

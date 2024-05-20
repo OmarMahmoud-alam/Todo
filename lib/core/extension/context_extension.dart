@@ -137,7 +137,6 @@ extension MediaqueryContextExtensions on BuildContext {
 
   /// check if device is on landscape mode
   bool get isLandscape => orientation == Orientation.landscape;
-
   /// check if device is on portrait mode
   bool get isPortrait => orientation == Orientation.portrait;
 
@@ -145,7 +144,6 @@ extension MediaqueryContextExtensions on BuildContext {
   double get devicePixelRatio => MediaQuery.of(this).devicePixelRatio;
 
   /// similar to [MediaQuery.of(this).textScaleFactor]
-  double get textScaleFactor => MediaQuery.of(this).textScaleFactor;
 
   /// get the shortestSide from screen
   double get mediaQueryShortestSide => mediaQuerySize.shortestSide;

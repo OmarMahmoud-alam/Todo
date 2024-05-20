@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:todoapp/core/utils/assest_fonts_constant/const_color.dart';
 
-
-Widget customTextField(
-    {Icon? endIcon,
-    Widget? prefix,
-    String? hintText,
-    int maxLines = 1,
-    int minLines = 1,
-    Color? color,
-    bool readOnly = false,
-    required bool isPassword,
-    required TextInputType type,
-    required TextEditingController controller,
-    void Function()? ontap,
-    VoidCallback? onPressed}) {
-  return TextField(
-    onTap:ontap,
+Widget customTextField({
+  Icon? endIcon,
+  Widget? prefix,
+  String? hintText,
+  int maxLines = 1,
+  int minLines = 1,
+  Color? color,
+  bool readOnly = false,
+  required bool isPassword,
+  required TextInputType type,
+  required TextEditingController controller,
+  void Function()? ontap,
+  String? Function(String?)? validate,
+  VoidCallback? onPressed,
+}) {
+  return TextFormField(
+      onTap: ontap,
       readOnly: readOnly,
       maxLines: maxLines,
       minLines: minLines,
+      validator: validate,
       controller: controller,
       style: TextStyle(color: Colors.black.withOpacity(.8)),
       obscureText: isPassword,
@@ -67,7 +69,6 @@ Widget customTextField(
             color: Color(0xFFE1E1E1),
           ),
         ),
-     
         hintMaxLines: 1,
         hintText: hintText,
       ));

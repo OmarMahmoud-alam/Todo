@@ -20,7 +20,7 @@ class LoginCubit extends Cubit<LoginState> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool showPassword = true;
-  late UserModel user;
+   UserModel? user;
   Future login(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       emit(LoginLoading());

@@ -1,9 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:todoapp/core/utils/route/magicroute.dart';
-import 'package:todoapp/core/utils/storage/sql_helper.dart';
 import 'package:todoapp/feature/auth/presentation/autho/views/widgets/custom_snackbar.dart';
 import 'package:todoapp/feature/home/data/model/todo_item_model/todo.dart';
 import 'package:todoapp/feature/home/data/repo/todo_list_repo.dart';
@@ -17,7 +14,6 @@ class FetchTodoListCubit extends Cubit<FetchTodoListState> {
   late List<Todo> todolist;
 
   int currentpage = 1;
-  late int totalitem ;
   bool islastpage = false;
   bool isgettingmoreblog = false;
   final ScrollController scrollController = ScrollController();
@@ -45,7 +41,6 @@ class FetchTodoListCubit extends Cubit<FetchTodoListState> {
       },
       (res) async {
         todolist = res.todos!;
-        totalitem = res.total!;
         print("bloglist${todolist.length}");
         listener();
         emit(FetchTodoListSucess());
@@ -71,7 +66,7 @@ class FetchTodoListCubit extends Cubit<FetchTodoListState> {
       },
       (res) async {
         isgettingmoreblog = false;
-        islastpage = (totalitem <= (currentpage * 10));
+        islastpage = res.todos!.isEmpty;
 
         todolist.addAll(res.todos!);
         emit(FetchTodoListSucess());

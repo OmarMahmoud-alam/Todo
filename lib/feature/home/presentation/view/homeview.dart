@@ -25,10 +25,12 @@ class HomeView extends StatelessWidget {
           appBar: AppBar(
             leading: CircleAvatar(
               radius: 15,
-              backgroundImage: NetworkImage(LoginCubit.of(context).user.image ??
+              backgroundImage: NetworkImage(LoginCubit.of(context)
+                      .user
+                      ?.image ??
                   'https://t3.ftcdn.net/jpg/03/46/83/96/240_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg'),
             ),
-            title: Text('Todo app'),
+            title: const Text('Todo app'),
           ),
           body: BlocBuilder<FetchTodoListCubit, FetchTodoListState>(
             buildWhen: (previous, current) =>

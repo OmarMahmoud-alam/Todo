@@ -29,7 +29,7 @@ class DatabaseHelper {
   Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
       CREATE TABLE todos(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id INTEGER PRIMARY KEY ,
         todo TEXT,
         completed INTEGER,
         userId INTEGER
@@ -39,7 +39,8 @@ class DatabaseHelper {
 
   Future<void> insertTodo(Todo todo) async {
     final db = await database;
-    await db.insert('todos', todo.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
+    await db.insert('todos', todo.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<List<Todo>> getTodos(int offset, int limit) async {
@@ -53,5 +54,26 @@ class DatabaseHelper {
     return List.generate(maps.length, (i) {
       return Todo.fromJson(maps[i]);
     });
+  }
+
+  Future<void> updateTodoCompleted(int id, bool completed) async {
+    final db = await database;
+
+    await db.update(
+      'todos',
+      {'completed': completed ? 1 : 0},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  Future<void> deleteTodoById(int id) async {
+    final db = await database;
+
+    await db.delete(
+      'todos',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
   }
 }

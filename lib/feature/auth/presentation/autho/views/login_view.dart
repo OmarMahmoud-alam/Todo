@@ -1,18 +1,23 @@
+import 'package:go_router/go_router.dart';
+import 'package:todoapp/core/utils/route/route.dart';
 import 'package:todoapp/feature/auth/presentation/autho/views/widgets/login_view_body.dart';
-import 'package:todoapp/feature/auth/presentation/autho/views_models/login_cubit/login_cubit.dart';
-
-//import 'package:todoapp/feature/auth/presentation/views_models/login_cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+        appBar: AppBar(
+          actions: [
+            TextButton(
+                onPressed: () => context.go(AppRouter.home),
+                child: Text('Skip'))
+          ],
+        ),
         body: SafeArea(
-      child: LoginViewBody(),
-    ));
+          child: LoginViewBody(),
+        ));
   }
 }
